@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>UrbanClean</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+         body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+      /* Slide-in animation for navbar */
+      @keyframes slideInFromTop {
+        0% {
+          transform: translateY(-100%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      .navbar {
+        animation: slideInFromTop 0.5s ease-out;
+      }
+
+      /* Fade-in animation for alerts */
+      .alert {
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+        <a class="navbar-brand" href="#">UrbanClean</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {{#if user}}
+                    <li class="nav-item "><a class="nav-link" href="/logout">Logout</a></li>
+                {{else}}
+                    <li class="nav-item "><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item "><a class="nav-link" href="/register">Register</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+      {{#if success_msg}}
+        <div class="alert alert-success fade">{{success_msg}}</div>
+      {{/if}}
+      {{#if error_msg}}
+        <div class="alert alert-danger fade">{{error_msg}}</div>
+      {{/if}}
+      {{#if error}}
+        <div class="alert alert-danger fade">{{error}}</div>
+      {{/if}}
+      {{#if errors}}
+        {{#each errors}}
+          <div class="alert alert-danger fade">{{msg}}</div>
+        {{/each}}
+      {{/if}}
+      {{{body}}}
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
